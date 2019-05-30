@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.zdxh.hotel.modle.Room" table="room">
+        <id name="roomId" column="roomId" length="20">
+
+        </id>
+        <property name="roomMessage" length="40"></property>
+        <property name="roomprice" length="10"></property>
+        <property name="bookingTime" length="20"></property>
+        <property name="flag"></property>
+        <property name="cu_ID"></property>
+
+    </class>
+</hibernate-mapping>

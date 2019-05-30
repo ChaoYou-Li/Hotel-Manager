@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 配置sessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <!-- 加载hibernate核心文件 -->
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+    </bean>
+    <!-- 配置hibernate模板 -->
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+        <!-- 通过工厂获得Session -->
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+
+    <!-- 配置DAO -->
+    <bean id="userDao" class="cn.zdxh.hotel.dao.impl.UserDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
+    </bean>
+    <bean id="employeeDao" class="cn.zdxh.hotel.dao.impl.EmployeeDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
+    </bean>
+    <bean id="customerDao" class="cn.zdxh.hotel.dao.impl.CustomerDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
+    </bean>
+    <bean id="roomDao" class="cn.zdxh.hotel.dao.impl.RoomDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
+    </bean>
+    <bean id="menuDao" class="cn.zdxh.hotel.dao.impl.MenuDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
+    </bean>
+    <bean id="messageDao" class="cn.zdxh.hotel.dao.impl.MessageDaoImpl">
+        <property name="hibernateTemplate" ref="hibernateTemplate"></property>
+    </bean>
+
+
+    <!-- 配置Service -->
+    <bean id="userService" class="cn.zdxh.hotel.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+    <bean id="employeeService" class="cn.zdxh.hotel.service.impl.EmployeeServiceImpl">
+        <property name="employeeDao" ref="employeeDao"></property>
+    </bean>
+    <bean id="customerService" class="cn.zdxh.hotel.service.impl.CustomerServiceImpl">
+        <property name="customerDao" ref="customerDao"></property>
+    </bean>
+    <bean id="roomService" class="cn.zdxh.hotel.service.impl.RoomServiceImpl">
+        <property name="roomDao" ref="roomDao"></property>
+    </bean>
+    <bean id="menuService" class="cn.zdxh.hotel.service.impl.MenuServiceImpl">
+        <property name="menuDao" ref="menuDao"></property>
+    </bean>
+    <bean id="messageService" class="cn.zdxh.hotel.service.impl.MessageServiceImpl">
+        <property name="messageDao" ref="messageDao"></property>
+    </bean>
+
+
+    <!-- 配置Action -->
+    <!-- <bean id="userAction" class="cn.zdxh.hotel.action.UserAction" scope="prototype"> -->
+    <!-- 	<property name="userService" ref="userService"></property> -->
+    <!-- </bean> -->
+    <!-- <bean id="employeeAction" class="cn.zdxh.hotel.action.UserAction"> -->
+    <!-- 	<property name="employeeService" ref="employeeService"></property> -->
+    <!-- </bean> -->
+
+
+    <!-- 事务管理 -->
+    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+    <!-- 通知增强方法 -->
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="save*"/>
+            <tx:method name="update*"/>
+            <tx:method name="delete*"/>
+            <tx:method name="find*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    <!-- 切面:将切入点与通知关联 -->
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* cn.zdxh.hotel.service..*.*(..))"/>
+    </aop:config>
+</beans>

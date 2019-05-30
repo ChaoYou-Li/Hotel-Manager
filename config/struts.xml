@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<!-- 开发者模式 -->
+<struts>
+    <!-- 启用开发模式 -->
+    <constant name="struts.devMode" value="true"></constant>
+    <!-- 设置action处理包 -->
+    <package name="SH" namespace="/" extends="struts-default">
+        <!-- 声明拦截器 -->
+        <interceptors>
+            <interceptor name="privilege" class="cn.zdxh.hotel.interceptor.LoginInterceptor">
+            </interceptor>
+            <interceptor-stack name="myStack">
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="privilege"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <!-- 处理action -->
+        <action name="register" class="cn.zdxh.hotel.action.RegisterAction" method="customerRegiste">
+            <result name="input">${pageContext.request.contextPath}/registe/register.jsp</result>
+            <result name="success">${pageContext.request.contextPath}/registe/register_success.jsp</result>
+            <result name="error">${pageContext.request.contextPath}/registe/register.jsp</result>
+
+        </action>
+        <action name="employeelogin" class="cn.zdxh.hotel.action.EmployeeLoginAction" method="employeeLogin">
+            <result name="input">${pageContext.request.contextPath}/login/login.jsp?rose=employee</result>
+            <result name="error">${pageContext.request.contextPath}/login/login.jsp?rose=employee</result>
+            <result name="success">${pageContext.request.contextPath}/employee/employee.jsp</result>
+        </action>
+        <action name="customerLogin" class="cn.zdxh.hotel.action.CustomerLoginAction" method="customerLogin">
+            <result name="input">${pageContext.request.contextPath}/login/login.jsp?rose=customer</result>
+            <result name="error">${pageContext.request.contextPath}/login/login.jsp?rose=customer</result>
+            <result name="success">${pageContext.request.contextPath}/customer/customer.jsp</result>
+        </action>
+        <action name="customerMessage" class="cn.zdxh.hotel.action.CustomerAction" method="customerMessage">
+            <result name="input">${pageContext.request.contextPath}/customer/customer.jsp?function=register</result>
+            <result name="error">${pageContext.request.contextPath}/customer/customer.jsp?function=register</result>
+            <result name="success">${pageContext.request.contextPath}/customer/customer.jsp?function=register</result>
+        </action>
+        <action name="emptyRoom" class="cn.zdxh.hotel.action.RoomBookingAction" method="findEmpty">
+            <result name="input">${pageContext.request.contextPath}/customer/customer.jsp?function=emptyRoom</result>
+            <result name="error">${pageContext.request.contextPath}/customer/customer.jsp?function=emptyRoom</result>
+            <result name="success">${pageContext.request.contextPath}/customer/customer.jsp?function=emptyRoom</result>
+        </action>
+        <action name="menuTable" class="cn.zdxh.hotel.action.MenuBookingAction" method="menuTable">
+            <result name="input">${pageContext.request.contextPath}/customer/customer.jsp?function=menuTable</result>
+            <result name="error">${pageContext.request.contextPath}/customer/customer.jsp?function=menuTable</result>
+            <result name="success">${pageContext.request.contextPath}/customer/customer.jsp?function=menuTable</result>
+        </action>
+        <action name="roomBooking" class="cn.zdxh.hotel.action.RoomBookingAction" method="roomBooking">
+            <result name="input">${pageContext.request.contextPath}/customer/customer.jsp?function=roomBooking</result>
+            <result name="error">${pageContext.request.contextPath}/customer/customer.jsp?function=roomBooking</result>
+            <result name="success">${pageContext.request.contextPath}/customer/customer.jsp?function=roomBooking
+            </result>
+        </action>
+        <action name="menuBooking" class="cn.zdxh.hotel.action.MenuBookingAction" method="menuBooking">
+            <result name="input">${pageContext.request.contextPath}/customer/customer.jsp?function="menuBooking"
+            </result>
+            <result name="error">${pageContext.request.contextPath}/customer/customer.jsp?function="menuBooking"
+            </result>
+            <result name="success">${pageContext.request.contextPath}/customer/customer.jsp?function="menuBooking"
+            </result>
+        </action>
+        <action name="billMoney" class="cn.zdxh.hotel.action.BillMoneyAction" method="billTable">
+            <result name="input">${pageContext.request.contextPath}/customer/customer.jsp?function=billMoney</result>
+            <result name="error">${pageContext.request.contextPath}/customer/customer.jsp?function=billMoney</result>
+            <result name="success">${pageContext.request.contextPath}/customer/customer.jsp?function=billMoney</result>
+        </action>
+
+    </package>
+
+
+    <package name="ssh" namespace="/employee" extends="struts-default">
+        <action name="addEmployee" class="cn.zdxh.hotel.action.EmployeeAction" method="addEmployee">
+            <result name="input">${pageContext.request.contextPath}/employee/employee.jsp?function=add;</result>
+            <result name="error">${pageContext.request.contextPath}/employee/employee.jsp?function=add</result>
+            <result name="success">${pageContext.request.contextPath}/employee/employee.jsp?function=add</result>
+        </action>
+
+        <action name="deleteEmployee" class="cn.zdxh.hotel.action.EmployeeAction" method="deleteEmployee">
+            <result name="input">${pageContext.request.contextPath}/employee/employee.jsp?function=delete</result>
+            <result name="error">${pageContext.request.contextPath}/employee/employee.jsp?function=delete</result>
+            <result name="success">${pageContext.request.contextPath}/employee/employee.jsp?function=delete</result>
+        </action>
+
+        <action name="updateEmployee" class="cn.zdxh.hotel.action.EmployeeAction" method="updateEmployee">
+            <result name="input">${pageContext.request.contextPath}/employee/employee.jsp?function=update</result>
+            <result name="error">${pageContext.request.contextPath}/employee/employee.jsp?function=update</result>
+            <result name="success">${pageContext.request.contextPath}/employee/employee.jsp?function=update</result>
+        </action>
+
+        <action name="selectEmployee" class="cn.zdxh.hotel.action.EmployeeAction" method="findAllEmployee">
+            <result name="input">${pageContext.request.contextPath}/employee/employee.jsp?function=select</result>
+            <result name="error">${pageContext.request.contextPath}/employee/employee.jsp?function=select</result>
+            <result name="success">${pageContext.request.contextPath}/employee/employee.jsp?function=select</result>
+        </action>
+
+
+    </package>
+
+
+</struts>

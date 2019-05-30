@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.zdxh.hotel.modle.Clean" table="clean">
+        <id name="roomId" column="roomId" length="40">
+
+        </id>
+        <property name="way" length="40"></property>
+        <property name="age" length="10"></property>
+        <property name="price" length="20"></property>
+        <property name="cu_ID" length="40"></property>
+    </class>
+</hibernate-mapping>

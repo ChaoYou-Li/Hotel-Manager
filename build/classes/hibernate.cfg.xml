@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- 指定方言 -->
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.MySQLDialect
+        </property>
+        <!-- 数据库驱动 -->
+        <property name="hibernate.connection.driver_class">
+            com.mysql.jdbc.Driver
+        </property>
+        <!-- 数据库url -->
+        <property name="hibernate.connection.url">
+            jdbc:mysql:///hotel
+        </property>
+        <property name="hibernate.connection.username">
+            root
+        </property>
+        <property name="hibernate.connection.password">
+            123456
+        </property>
+        <!-- 显示sql语句 -->
+        <property name="hibernate.show_sql">true</property>
+        <!-- 格式化sql语句 -->
+        <property name="format_sql">true</property>
+        <property name="hbm2ddl.auto">update</property>
+        <!--取消Bean校验 -->
+        <property name="javax.persistence.validation.mode">none</property>
+        <property name="hibernate.connection.provider_class">
+            org.hibernate.c3p0.internal.C3P0ConnectionProvider
+        </property>
+        <!-- 关联hbm配置文件 -->
+        <mapping resource="cn/zdxh/hotel/modle/User.hbm.xml"/>
+        <mapping resource="cn/zdxh/hotel/modle/Employee.hbm.xml"/>
+        <mapping resource="cn/zdxh/hotel/modle/Customer.hbm.xml"/>
+        <mapping resource="cn/zdxh/hotel/modle/Room.hbm.xml"/>
+        <mapping resource="cn/zdxh/hotel/modle/Menu.hbm.xml"/>
+        <mapping resource="cn/zdxh/hotel/modle/Message.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>

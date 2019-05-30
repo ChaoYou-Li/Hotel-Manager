@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 实现类对应数据表 -->
+    <class name="cn.zdxh.hotel.modle.Menu" table="menu">
+        <!-- 设置数据表的主键 -->
+        <id name="m_id" column="m_id" length="40">
+        </id>
+        <!-- 普通字段 -->
+        <property name="m_name"></property>
+        <property name="m_price" length="20"></property>
+        <property name="m_number" length="10"></property>
+        <property name="flag"></property>
+        <property name="cu_ID"></property>
+
+    </class>
+</hibernate-mapping>

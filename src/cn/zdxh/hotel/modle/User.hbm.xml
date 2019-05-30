@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.zdxh.hotel.modle.User" table="user">
+        <id name="cu_username" column="cu_username" length="50">
+        </id>
+        <property name="cu_password" length="50"></property>
+        <property name="cu_phoneNumber" length="50"></property>
+        <property name="cu_email" length="60"></property>
+
+    </class>
+
+</hibernate-mapping>
